@@ -1,8 +1,8 @@
 <template>
   <section class="container">
     <h1>Är staden en håla eller inte?</h1>
-    <n-link to="/game">STARTA</n-link>
-    <n-link to="/addcity">ADD CITY</n-link>
+    <n-link to="/game" class="starta">STARTA</n-link>
+    <n-link to="/addcity" class="starta">ADD CITY</n-link>
   </section>
 </template>
 
@@ -22,5 +22,6 @@ export default {};
 .starta {
   display: inline-block;
   text-decoration: none;
+  color: #000;
 }
 </style>

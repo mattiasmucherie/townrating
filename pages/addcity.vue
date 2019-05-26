@@ -3,7 +3,7 @@
   <div class="container">
     <div class="form-container">
       <form class="submission-form" name="addtown" v-on:submit.prevent="addTown">
-        <h1 class="title">Contact</h1>
+        <h1 class="title">Add a city</h1>
         <label class="form-label" for="name">Name:</label>
         <input class="form-field" name="name" id="name" v-model="name" type="text" required>
         <label class="form-label" for="county">County</label>

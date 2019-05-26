@@ -1,34 +1,52 @@
 <template>
   <section>
-    <ul v-for="town in towns" :key="town.id">
-      <li>{{town.name}}</li>
-    </ul>
+    <h1>{{town}}</h1>
   </section>
 </template>
 
 <script>
 import { fireDb } from "~/plugins/firebase.js";
+import firebase from "firebase/app";
 export default {
   data() {
     return {
-      text: "oki",
-      towns: []
+      town: "null"
     };
   },
   async asyncData() {
     const ref = fireDb.collection("towns");
-    let snap;
-    let listOfTowns = [];
-    try {
-      let snap = await ref.get();
-      snap.forEach(doc => {
-        listOfTowns.push(doc.data());
+    var key = ref.doc().id;
+
+    console.log(key);
+    ref
+      .where(firebase.firestore.FieldPath.documentId(), ">=", key)
+      .limit(1)
+      .get()
+      .then(snapshot => {
+        if (snapshot.size > 0) {
+          snapshot.forEach(doc => {
+            console.log(doc.id, "=>", doc.data());
+          });
+        } else {
+          const quote = ref
+            .where(firebase.firestore.FieldPath.documentId(), "<=", key)
+            .limit(1)
+            .get()
+            .then(snapshot => {
+              snapshot.forEach(doc => {
+                console.log(doc.id, "=>", doc.data());
+              });
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      })
+      .catch(err => {
+        console.log(err);
       });
-    } catch (e) {
-      console.log("error", e.message);
-    }
     return {
-      towns: listOfTowns
+      town: { name: "Nyköping" }
     };
   }
 };
