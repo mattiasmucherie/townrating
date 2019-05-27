@@ -20,7 +20,6 @@ export default {
     const key = ref.doc().id;
     let town = null;
 
-    console.log(key);
     try {
       const snap = await ref
         .where(firebase.firestore.FieldPath.documentId(), ">=", key)
@@ -28,7 +27,6 @@ export default {
         .get();
       if (snap.size > 0) {
         snap.forEach(doc => {
-          console.log("snap1", doc.data());
           town = doc.data();
           town.id = doc.id;
         });
@@ -38,7 +36,6 @@ export default {
           .limit(1)
           .get();
         snap2.forEach(doc => {
-          console.log("snap2", doc.data());
           town = doc.data();
           town.id = doc.id;
         });

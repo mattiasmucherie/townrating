@@ -3,7 +3,7 @@
   <div class="container">
     <div class="form-container">
       <form class="submission-form" name="addtown" v-on:submit.prevent="addTown">
-        <h1 class="title">Add a city</h1>
+        <h1 class="title">Add a City</h1>
         <label class="form-label" for="name">Name:</label>
         <input class="form-field" name="name" id="name" v-model="name" type="text" required>
         <label class="form-label" for="county">County</label>
@@ -66,7 +66,6 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #000;
 }
 
 .submission-form {
@@ -89,30 +88,33 @@ export default {
     -moz-transition: all 0.2s ease-in-out;
     -ms-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
-    border: 1px solid #fff;
+    border: 2px solid #fff;
     &:focus {
-      border: 1px solid #304ffe;
+      border: 2px solid #b8dbd9;
     }
   }
   .form-button {
     display: block;
     border: 0;
-    background: #304ffe;
+    background: #b8dbd9;
     width: auto;
     margin: 1rem auto;
     padding: 8px;
     text-transform: uppercase;
-    color: #fff;
+    color: #000;
     border-radius: 0.5rem;
     cursor: pointer;
+    transition: background 0.2s ease;
+    border: 4px solid #b8dbd9;
     &:hover {
-      background: #0026ca;
-      color: #fff;
+      background: #586f7c;
+      color: #f5f5f9;
     }
   }
 }
 .form-container {
-  background: #00b7d3;
-  border-radius: 0.2rem;
+  background: #586f7c;
+  border-radius: 1rem;
+  color: #f5f5f9;
 }
 </style>
