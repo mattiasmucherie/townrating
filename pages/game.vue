@@ -1,6 +1,10 @@
 <template>
-  <section>
-    <h1>{{town}}</h1>
+  <section class="container">
+    <div class="containerTitles">
+      <h1>{{town.name}}</h1>
+      <h2>{{town.county}}</h2>
+      <h2>{{town.population}}</h2>
+    </div>
   </section>
 </template>
 
@@ -9,48 +13,57 @@ import { fireDb } from "~/plugins/firebase.js";
 import firebase from "firebase/app";
 export default {
   data() {
-    return {
-      town: "null"
-    };
+    return {};
   },
   async asyncData() {
     const ref = fireDb.collection("towns");
-    var key = ref.doc().id;
+    const key = ref.doc().id;
+    let town = null;
 
     console.log(key);
-    ref
-      .where(firebase.firestore.FieldPath.documentId(), ">=", key)
-      .limit(1)
-      .get()
-      .then(snapshot => {
-        if (snapshot.size > 0) {
-          snapshot.forEach(doc => {
-            console.log(doc.id, "=>", doc.data());
-          });
-        } else {
-          const quote = ref
-            .where(firebase.firestore.FieldPath.documentId(), "<=", key)
-            .limit(1)
-            .get()
-            .then(snapshot => {
-              snapshot.forEach(doc => {
-                console.log(doc.id, "=>", doc.data());
-              });
-            })
-            .catch(err => {
-              console.log(err);
-            });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    try {
+      const snap = await ref
+        .where(firebase.firestore.FieldPath.documentId(), ">=", key)
+        .limit(1)
+        .get();
+      if (snap.size > 0) {
+        snap.forEach(doc => {
+          console.log("snap1", doc.data());
+          town = doc.data();
+          town.id = doc.id;
+        });
+      } else {
+        const snap2 = await ref
+          .where(firebase.firestore.FieldPath.documentId(), "<=", key)
+          .limit(1)
+          .get();
+        snap2.forEach(doc => {
+          console.log("snap2", doc.data());
+          town = doc.data();
+          town.id = doc.id;
+        });
+      }
+    } catch (err) {
+      //TODO: handle errors
+      console.log(err);
+    }
     return {
-      town: { name: "Nyköping" }
+      town
     };
   }
 };
 </script>
 
 <style>
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.containerTitles {
+  display: block;
+}
 </style>

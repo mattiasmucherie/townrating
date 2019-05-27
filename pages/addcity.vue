@@ -17,8 +17,7 @@
           type="number"
           required
         >
-        <label class="form-label" for="population">ID</label>
-        <input class="form-field" name="id" id="id" v-model="id" type="number" required>
+
         <button class="form-button" type="submit" value="Add City">Send</button>
       </form>
     </div>
@@ -33,8 +32,7 @@ export default {
     return {
       name: "",
       county: "",
-      population: null,
-      id: null
+      population: null
     };
   },
   methods: {
@@ -44,13 +42,15 @@ export default {
         county: this.county,
         name: this.name,
         population: Number(this.population),
-        id: Number(this.id),
         rating: { negative: 0, positive: 0 }
       };
       let response;
       try {
         response = await ref.add(body);
         console.log(response);
+        this.name = "";
+        this.county = "";
+        this.population = null;
       } catch (e) {
         console.log(e);
       }
