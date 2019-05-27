@@ -1,8 +1,10 @@
 <template>
   <section class="container">
-    <h1>Är staden en håla eller inte?</h1>
-    <n-link to="/game" class="starta">STARTA</n-link>
-    <n-link to="/addcity" class="starta">ADD CITY</n-link>
+    <div class="headlines">
+      <h1>Är staden en håla eller inte?</h1>
+      <n-link to="/game">STARTA</n-link>
+      <n-link to="/addcity">ADD CITY</n-link>
+    </div>
   </section>
 </template>
 
@@ -19,8 +21,8 @@ export default {};
   align-items: center;
   text-align: center;
 }
-.starta {
-  display: inline-block;
+.headlines {
+  display: block;
   text-decoration: none;
   color: #000;
 }

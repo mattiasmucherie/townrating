@@ -5,3 +5,11 @@
 This directory contains your un-compiled assets such as LESS, SASS, or JavaScript.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/guide/assets#webpacked).
+
+Colors:
+
+#000000
+#586F7C
+#B8DBD9
+#F4F4F9
+#04724D
